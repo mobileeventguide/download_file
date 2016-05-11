@@ -18,6 +18,16 @@ describe DownloadFile do
           to_return(:status => 200, :body => "this is the body", :headers => {})
       expect(d1.download.to_path).not_to eql(d2.download.to_path)
     end
+
+    context 'with custom headers' do
+      it 'makes the correct request' do
+        d = DownloadFile.new('http://example.com/file.txt', { 'Authorization' => 'Bearer abcd' })
+        stub_request(:get, "http://example.com/file.txt").
+          with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Authorization'=>'Bearer abcd', 'User-Agent'=>'Ruby'}).
+          to_return(:status => 200, :body => "", :headers => {})
+        expect(File.exists?(d.download)).to be(true)
+      end
+    end
   end
 
   context "when url is invalid" do
