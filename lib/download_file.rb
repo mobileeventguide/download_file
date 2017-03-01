@@ -1,4 +1,6 @@
-require_relative "download_file/version"
+# frozen_string_literal: true
+
+require_relative 'download_file/version'
 require 'open-uri'
 
 class DownloadFile
