@@ -2,6 +2,7 @@
 
 require_relative 'download_file/version'
 require 'open-uri'
+require 'tempfile'
 
 class DownloadFile
   attr_reader :url, :headers
