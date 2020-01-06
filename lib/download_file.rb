@@ -14,7 +14,7 @@ class DownloadFile
   def download
     @tmpfile ||= begin
       tmpfile = Tempfile.new('download')
-      open(url, headers) do |read_file|
+      URI.open(url, headers) do |read_file|
         tmpfile.syswrite(read_file.read)
       end
       tmpfile
